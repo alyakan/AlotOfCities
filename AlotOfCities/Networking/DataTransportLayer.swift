@@ -23,5 +23,6 @@ enum DataTramsportLayerError: Error {
 }
 
 protocol DataTransportLayer {
+    func fetch<T: Decodable>(_ resource: DataResource, completion: @escaping (Result<T, Error>) -> Void)
     func fetch<T: Decodable>(_ resource: DataResource, type: T.Type, completion: @escaping (Result<T, Error>) -> Void)
 }

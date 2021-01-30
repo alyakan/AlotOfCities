@@ -9,11 +9,15 @@
 import Foundation
 
 struct JsonDataTransportLayer: DataTransportLayer {
-    func fetch<T>(_ resource: DataResource, type: T.Type, completion: @escaping (Result<T, Error>) -> Void) where T: Decodable {
+    func fetch<T>(_ resource: DataResource, completion: @escaping (Result<T, Error>) -> Void) where T: Decodable {
         let workItem = DispatchWorkItem {
             completion(self.readJSONFromFile(fileName: String(describing: resource)))
         }
         DispatchQueue.global().async(execute: workItem)
+    }
+
+    func fetch<T>(_ resource: DataResource, type: T.Type, completion: @escaping (Result<T, Error>) -> Void) where T: Decodable {
+        fetch(resource, completion: completion)
     }
 
     private func readJSONFromFile<T: Decodable>(fileName: String) -> Result<T, Error> {

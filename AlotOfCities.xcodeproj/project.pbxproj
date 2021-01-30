@@ -18,6 +18,7 @@
 		7179D8CB25C5919300A56A83 /* DataTransportLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179D8C925C5919300A56A83 /* DataTransportLayer.swift */; };
 		7179D8D025C591FD00A56A83 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179D8CF25C591FD00A56A83 /* City.swift */; };
 		7179D8D525C5929800A56A83 /* cities.json in Resources */ = {isa = PBXBuildFile; fileRef = 7179D8D425C5929800A56A83 /* cities.json */; };
+		7179D8DB25C59E8100A56A83 /* CityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179D8DA25C59E8100A56A83 /* CityProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		7179D8C925C5919300A56A83 /* DataTransportLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTransportLayer.swift; sourceTree = "<group>"; };
 		7179D8CF25C591FD00A56A83 /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		7179D8D425C5929800A56A83 /* cities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cities.json; sourceTree = "<group>"; };
+		7179D8DA25C59E8100A56A83 /* CityProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				7179D8CF25C591FD00A56A83 /* City.swift */,
+				7179D8DA25C59E8100A56A83 /* CityProvider.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7179D8DB25C59E8100A56A83 /* CityProvider.swift in Sources */,
 				7179D8CB25C5919300A56A83 /* DataTransportLayer.swift in Sources */,
 				7179D8A725C58E9100A56A83 /* ViewController.swift in Sources */,
 				7179D8D025C591FD00A56A83 /* City.swift in Sources */,

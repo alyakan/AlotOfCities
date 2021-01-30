@@ -8,15 +8,14 @@
 import XCTest
 @testable import AlotOfCities
 
+struct MockViewModel: CityProvider {
+    let dataTransportLayer: DataTransportLayer = JsonDataTransportLayer()
+}
+
 class AlotOfCitiesTests: XCTestCase {
+    static let numberOfCities = 209557
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    // MARK: - JsonDataTransportLayer Tests
 
     func testFetchingCitiesJsonAsCityObjectsReturnsSuccessfully() throws {
         // Given
@@ -27,7 +26,7 @@ class AlotOfCitiesTests: XCTestCase {
         dataLayer.fetch(.cities, type: [City].self) { result in
             switch result {
             // Then
-            case .success(let cities): XCTAssertEqual(cities.count, 209557)
+            case .success(let cities): XCTAssertEqual(cities.count, Self.numberOfCities)
             case .failure(let error): XCTFail(error.localizedDescription)
             }
             exp.fulfill()
@@ -43,5 +42,23 @@ class AlotOfCitiesTests: XCTestCase {
                 XCTFail(error.localizedDescription)
             }
         }
+    }
+
+    // MARK: - CityProvider Tests
+
+    func testCityProviderFetchesAllCities() throws {
+        // Given
+        let exp = XCTestExpectation(description: "Couldn't load citities")
+
+        // When
+        MockViewModel().fetchCities { result in
+            switch result {
+            // Then
+            case .success(let cities): XCTAssertEqual(cities.count, Self.numberOfCities)
+            case .failure(let error): XCTFail(error.localizedDescription)
+            }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 10)
     }
 }
