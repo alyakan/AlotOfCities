@@ -25,17 +25,36 @@ class CitiesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+        addSearchController()
+        listenToViewStateChanges()
+    }
+
+    deinit {
+        cancelBag.cancel()
+    }
+
+    // MARK: - Helper functions
+
+    private func setupView() {
         title = "Cities"
         navigationController?.navigationBar.prefersLargeTitles = true
+    }
+
+    private func addSearchController() {
+        let search = UISearchController(searchResultsController: nil)
+        search.searchResultsUpdater = self
+        search.obscuresBackgroundDuringPresentation = false
+        search.searchBar.placeholder = "Type something here to search"
+        navigationItem.searchController = search
+    }
+
+    private func listenToViewStateChanges() {
         viewModel.$viewState.sink { [weak self] _ in
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
         }.store(in: cancelBag)
-    }
-
-    deinit {
-        cancelBag.cancel()
     }
 
     // MARK: - Table view data source
@@ -64,5 +83,13 @@ class CitiesTableViewController: UITableViewController {
         case .dataLoaded: return "\(viewModel.cities.count) cities found"
         case .error: return "\(viewModel.error?.localizedDescription ?? "Something went wrong")"
         }
+    }
+}
+
+extension CitiesTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+
+//        TODO: viewModel.search(for: text)
     }
 }
