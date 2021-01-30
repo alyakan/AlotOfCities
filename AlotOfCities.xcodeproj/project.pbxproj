@@ -19,6 +19,8 @@
 		7179D8D025C591FD00A56A83 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179D8CF25C591FD00A56A83 /* City.swift */; };
 		7179D8D525C5929800A56A83 /* cities.json in Resources */ = {isa = PBXBuildFile; fileRef = 7179D8D425C5929800A56A83 /* cities.json */; };
 		7179D8DB25C59E8100A56A83 /* CityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179D8DA25C59E8100A56A83 /* CityProvider.swift */; };
+		7179D8DF25C5A2AF00A56A83 /* CitiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179D8DE25C5A2AF00A56A83 /* CitiesViewModel.swift */; };
+		7179D8E425C5AAD000A56A83 /* CancelBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179D8E325C5AAD000A56A83 /* CancelBag.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		7179D8CF25C591FD00A56A83 /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		7179D8D425C5929800A56A83 /* cities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cities.json; sourceTree = "<group>"; };
 		7179D8DA25C59E8100A56A83 /* CityProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityProvider.swift; sourceTree = "<group>"; };
+		7179D8DE25C5A2AF00A56A83 /* CitiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesViewModel.swift; sourceTree = "<group>"; };
+		7179D8E325C5AAD000A56A83 /* CancelBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelBag.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,12 +93,14 @@
 		7179D8A125C58E9100A56A83 /* AlotOfCities */ = {
 			isa = PBXGroup;
 			children = (
+				7179D8E225C5AAC400A56A83 /* Common */,
 				7179D8D325C5927B00A56A83 /* Resources */,
 				7179D8CE25C591EE00A56A83 /* Models */,
 				7179D8C725C5919300A56A83 /* Networking */,
 				7179D8A225C58E9100A56A83 /* AppDelegate.swift */,
 				7179D8A425C58E9100A56A83 /* SceneDelegate.swift */,
 				7179D8A625C58E9100A56A83 /* ViewController.swift */,
+				7179D8DE25C5A2AF00A56A83 /* CitiesViewModel.swift */,
 				7179D8A825C58E9100A56A83 /* Main.storyboard */,
 				7179D8AD25C58E9300A56A83 /* LaunchScreen.storyboard */,
 			);
@@ -136,6 +142,14 @@
 				7179D8B025C58E9300A56A83 /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		7179D8E225C5AAC400A56A83 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7179D8E325C5AAD000A56A83 /* CancelBag.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,6 +258,8 @@
 				7179D8A725C58E9100A56A83 /* ViewController.swift in Sources */,
 				7179D8D025C591FD00A56A83 /* City.swift in Sources */,
 				7179D8CA25C5919300A56A83 /* JsonDataTransportLayer.swift in Sources */,
+				7179D8E425C5AAD000A56A83 /* CancelBag.swift in Sources */,
+				7179D8DF25C5A2AF00A56A83 /* CitiesViewModel.swift in Sources */,
 				7179D8A325C58E9100A56A83 /* AppDelegate.swift in Sources */,
 				7179D8A525C58E9100A56A83 /* SceneDelegate.swift in Sources */,
 			);
