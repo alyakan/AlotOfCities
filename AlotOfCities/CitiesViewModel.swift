@@ -17,6 +17,7 @@ class CitiesViewModel: CityProvider, ObservableObject {
     private(set) var error: Error?
     @Published var viewState: ViewState = .initial
 
+    private let searchAgent = SearchAgent()
     private var citiesBackup: [City] = []
 
     init(dataTransportLayer: DataTransportLayer) {
@@ -40,7 +41,7 @@ class CitiesViewModel: CityProvider, ObservableObject {
         }
     }
 
-    func search(for searchString: String) {
+    func search(for searchString: String, using algorithm: SearchAgent.Algorithm = .binary) {
         guard viewState == .dataLoaded else { return }
 
         guard searchString.isEmpty == false else {
@@ -54,10 +55,7 @@ class CitiesViewModel: CityProvider, ObservableObject {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
 
-            self.cities = self.citiesBackup.filter {
-                $0.name.lowercased().starts(with: searchString.lowercased())
-            }
-
+            self.cities = self.searchAgent.search(for: searchString, in: self.citiesBackup, using: algorithm)
             self.viewState = .dataLoaded
         }
     }

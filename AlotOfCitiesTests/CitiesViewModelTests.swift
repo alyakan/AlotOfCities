@@ -157,7 +157,7 @@ class CitiesViewModelTests: XCTestCase {
         wait(for: [exp], timeout: TestConstants.kWaitTimeout)
 
         let searchString = "Aachen"
-        viewModel.search(for: searchString)
+        viewModel.search(for: searchString, using: .binary)
         XCTAssertEqual(viewModel.viewState, .loadingData)
 
         exp = XCTestExpectation(description: "Failed to complete searching")

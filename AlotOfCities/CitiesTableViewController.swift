@@ -11,11 +11,6 @@ class CitiesTableViewController: UITableViewController {
     let viewModel = CitiesViewModel(dataTransportLayer: JsonDataTransportLayer())
     private let cancelBag = CancelBag()
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        viewModel.startFetching()
-    }
-
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         viewModel.startFetching()

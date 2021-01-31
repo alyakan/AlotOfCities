@@ -8,22 +8,7 @@
 import XCTest
 @testable import AlotOfCities
 
-struct TestConstants {
-    static let kNumberOfCities = 209557
-    static let kWaitTimeout: TimeInterval = 10
-}
-
-struct MockViewModel: CityProvider {
-    let dataTransportLayer: DataTransportLayer = JsonDataTransportLayer()
-}
-
 class AlotOfCitiesTests: XCTestCase {
-    private let cancelBag = CancelBag()
-
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-        cancelBag.cancel()
-    }
 
     // MARK: - JsonDataTransportLayer Tests
 
