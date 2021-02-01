@@ -34,13 +34,15 @@ class CitiesTableViewController: UITableViewController {
     private func setupView() {
         title = "Cities"
         navigationController?.navigationBar.prefersLargeTitles = true
+        tableView.tableFooterView = UIView(frame: .zero)
+        tableView.register(CitiesTableViewCell.self, forCellReuseIdentifier: CitiesTableViewCell.kReuseIdentifier)
     }
 
     private func addSearchController() {
         let search = UISearchController(searchResultsController: nil)
         search.searchResultsUpdater = self
         search.obscuresBackgroundDuringPresentation = false
-        search.searchBar.placeholder = "Type something here to search"
+        search.searchBar.placeholder = "Search for a city"
         navigationItem.searchController = search
     }
 
@@ -59,12 +61,15 @@ class CitiesTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CitiesTableViewCell.kReuseIdentifier, for: indexPath) as? CitiesTableViewCell else {
+            return UITableViewCell()
+        }
 
         guard indexPath.row < viewModel.cities.count else { return cell }
 
         let city = viewModel.cities[indexPath.row]
-        cell.textLabel?.text = "\(city.name), \(city.country), (\(city.coord.lat), \(city.coord.lon))"
+        cell.titleLabel.text = "\(city.name), \(city.country)"
+        cell.subtitleLabel.text = "latitude: \(city.coord.lat), longitude: \(city.coord.lon)"
 
         return cell
     }
@@ -73,10 +78,10 @@ class CitiesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch viewModel.viewState {
-        case .initial: return "Loading will start shortly..."
-        case .loadingData: return "Loading..."
-        case .dataLoaded: return "\(viewModel.cities.count) cities found"
-        case .error: return "\(viewModel.error?.localizedDescription ?? "Something went wrong")"
+        case .initial: return "    Loading will start shortly..."
+        case .loadingData: return "    Loading..."
+        case .dataLoaded: return "    \(viewModel.cities.count) cities found"
+        case .error: return "    \(viewModel.error?.localizedDescription ?? "Something went wrong")"
         }
     }
 }
