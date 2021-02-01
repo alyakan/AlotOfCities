@@ -84,6 +84,13 @@ class CitiesTableViewController: UITableViewController {
         case .error: return "    \(viewModel.error?.localizedDescription ?? "Something went wrong")"
         }
     }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // TODO: move to coordinator.
+        tableView.deselectRow(at: indexPath, animated: true)
+        let vc = CityDetailViewController(viewModel: CityDetailViewModel(city: viewModel.cities[indexPath.row]))
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension CitiesTableViewController: UISearchResultsUpdating {

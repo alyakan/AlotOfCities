@@ -11,6 +11,9 @@ enum ViewState {
     case initial, loadingData, dataLoaded, error
 }
 
+/**
+ I found a normal list to be convenient in representation and suitable for binary searches on partial text input.
+ */
 class CitiesViewModel: CityProvider, ObservableObject {
     let dataTransportLayer: DataTransportLayer
     private(set) var cities: [City] = []
@@ -26,19 +29,7 @@ class CitiesViewModel: CityProvider, ObservableObject {
 
     func startFetching() {
         viewState = .loadingData
-        fetchCities { [weak self] result in
-            guard let self = self else { return }
-
-            switch result {
-            case .success(let cities):
-                self.cities = cities.sorted(by: { ($0.name, $0.country) <= ($1.name, $1.country) })
-                self.citiesBackup = self.cities
-                self.viewState = .dataLoaded
-            case .failure(let error):
-                self.error = error
-                self.viewState = .error
-            }
-        }
+        fetchCities(updateViewModel(withFetchResult:))
     }
 
     func search(for searchString: String, using algorithm: SearchAgent.Algorithm = .binary) {
@@ -57,6 +48,20 @@ class CitiesViewModel: CityProvider, ObservableObject {
 
             self.cities = self.searchAgent.search(for: searchString, in: self.citiesBackup, using: algorithm)
             self.viewState = .dataLoaded
+        }
+    }
+
+    // MARK: - Helper functions
+
+    private func updateViewModel(withFetchResult result: Result<[City], Error>) {
+        switch result {
+        case .success(let cities):
+            self.cities = cities.sorted(by: { ($0.name, $0.country) <= ($1.name, $1.country) })
+            self.citiesBackup = self.cities
+            self.viewState = .dataLoaded
+        case .failure(let error):
+            self.error = error
+            self.viewState = .error
         }
     }
 }
