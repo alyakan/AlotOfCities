@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7179D8A325C58E9100A56A83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179D8A225C58E9100A56A83 /* AppDelegate.swift */; };
 		7179D8A525C58E9100A56A83 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179D8A425C58E9100A56A83 /* SceneDelegate.swift */; };
-		7179D8AA25C58E9100A56A83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7179D8A825C58E9100A56A83 /* Main.storyboard */; };
 		7179D8AC25C58E9300A56A83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7179D8AB25C58E9300A56A83 /* Assets.xcassets */; };
 		7179D8AF25C58E9300A56A83 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7179D8AD25C58E9300A56A83 /* LaunchScreen.storyboard */; };
 		7179D8BE25C5916500A56A83 /* AlotOfCitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179D8BD25C5916500A56A83 /* AlotOfCitiesTests.swift */; };
@@ -28,10 +27,11 @@
 		7179D90725C7539500A56A83 /* BinarySearchAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179D90625C7539500A56A83 /* BinarySearchAgent.swift */; };
 		7179D90C25C7541700A56A83 /* BuiltInSearchAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179D90B25C7541700A56A83 /* BuiltInSearchAgent.swift */; };
 		7179D97325C88F5E00A56A83 /* CitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179D97225C88F5E00A56A83 /* CitiesTableViewCell.swift */; };
-		7179D97825C8923200A56A83 /* CitiesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179D8E725C5AF9600A56A83 /* CitiesTableViewController.swift */; };
 		7179D97D25C8924B00A56A83 /* SearchAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179D8EF25C7459E00A56A83 /* SearchAgent.swift */; };
 		7179D98D25C89A4000A56A83 /* CityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179D98B25C89A4000A56A83 /* CityDetailViewController.swift */; };
 		7179D98E25C89A4000A56A83 /* CityDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7179D98C25C89A4000A56A83 /* CityDetailViewController.xib */; };
+		7179D9CC25C9B1A500A56A83 /* CitiesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7179D9CA25C9B1A500A56A83 /* CitiesTableViewController.swift */; };
+		7179D9CD25C9B1A500A56A83 /* CitiesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7179D9CB25C9B1A500A56A83 /* CitiesTableViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +48,6 @@
 		7179D89F25C58E9100A56A83 /* AlotOfCities.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlotOfCities.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7179D8A225C58E9100A56A83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7179D8A425C58E9100A56A83 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7179D8A925C58E9100A56A83 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7179D8AB25C58E9300A56A83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7179D8AE25C58E9300A56A83 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7179D8B025C58E9300A56A83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,7 +61,6 @@
 		7179D8DA25C59E8100A56A83 /* CityProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityProvider.swift; sourceTree = "<group>"; };
 		7179D8DE25C5A2AF00A56A83 /* CitiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesViewModel.swift; sourceTree = "<group>"; };
 		7179D8E325C5AAD000A56A83 /* CancelBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelBag.swift; sourceTree = "<group>"; };
-		7179D8E725C5AF9600A56A83 /* CitiesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesTableViewController.swift; sourceTree = "<group>"; };
 		7179D8EB25C5C18D00A56A83 /* CitiesViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesViewModelTests.swift; sourceTree = "<group>"; };
 		7179D8EF25C7459E00A56A83 /* SearchAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAgent.swift; sourceTree = "<group>"; };
 		7179D8F325C74AF400A56A83 /* SearchAgentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAgentTests.swift; sourceTree = "<group>"; };
@@ -74,6 +72,8 @@
 		7179D97225C88F5E00A56A83 /* CitiesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesTableViewCell.swift; sourceTree = "<group>"; };
 		7179D98B25C89A4000A56A83 /* CityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailViewController.swift; sourceTree = "<group>"; };
 		7179D98C25C89A4000A56A83 /* CityDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CityDetailViewController.xib; sourceTree = "<group>"; };
+		7179D9CA25C9B1A500A56A83 /* CitiesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesTableViewController.swift; sourceTree = "<group>"; };
+		7179D9CB25C9B1A500A56A83 /* CitiesTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CitiesTableViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,7 +122,6 @@
 				7179D8C725C5919300A56A83 /* Networking */,
 				7179D8A225C58E9100A56A83 /* AppDelegate.swift */,
 				7179D8A425C58E9100A56A83 /* SceneDelegate.swift */,
-				7179D8A825C58E9100A56A83 /* Main.storyboard */,
 				7179D8AD25C58E9300A56A83 /* LaunchScreen.storyboard */,
 			);
 			path = AlotOfCities;
@@ -209,9 +208,10 @@
 		7179D96D25C88F3B00A56A83 /* Cities */ = {
 			isa = PBXGroup;
 			children = (
-				7179D8E725C5AF9600A56A83 /* CitiesTableViewController.swift */,
 				7179D8DE25C5A2AF00A56A83 /* CitiesViewModel.swift */,
 				7179D97225C88F5E00A56A83 /* CitiesTableViewCell.swift */,
+				7179D9CA25C9B1A500A56A83 /* CitiesTableViewController.swift */,
+				7179D9CB25C9B1A500A56A83 /* CitiesTableViewController.xib */,
 			);
 			path = Cities;
 			sourceTree = "<group>";
@@ -308,7 +308,7 @@
 				7179D8D525C5929800A56A83 /* cities.json in Resources */,
 				7179D8AF25C58E9300A56A83 /* LaunchScreen.storyboard in Resources */,
 				7179D8AC25C58E9300A56A83 /* Assets.xcassets in Resources */,
-				7179D8AA25C58E9100A56A83 /* Main.storyboard in Resources */,
+				7179D9CD25C9B1A500A56A83 /* CitiesTableViewController.xib in Resources */,
 				7179D98E25C89A4000A56A83 /* CityDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,8 +331,8 @@
 				7179D97325C88F5E00A56A83 /* CitiesTableViewCell.swift in Sources */,
 				7179D90C25C7541700A56A83 /* BuiltInSearchAgent.swift in Sources */,
 				7179D97D25C8924B00A56A83 /* SearchAgent.swift in Sources */,
+				7179D9CC25C9B1A500A56A83 /* CitiesTableViewController.swift in Sources */,
 				7179D8CB25C5919300A56A83 /* DataTransportLayer.swift in Sources */,
-				7179D97825C8923200A56A83 /* CitiesTableViewController.swift in Sources */,
 				7179D8D025C591FD00A56A83 /* City.swift in Sources */,
 				7179D90725C7539500A56A83 /* BinarySearchAgent.swift in Sources */,
 				7179D8CA25C5919300A56A83 /* JsonDataTransportLayer.swift in Sources */,
@@ -368,14 +368,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		7179D8A825C58E9100A56A83 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7179D8A925C58E9100A56A83 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		7179D8AD25C58E9300A56A83 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

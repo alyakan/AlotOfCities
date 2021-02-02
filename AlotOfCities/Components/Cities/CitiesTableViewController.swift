@@ -7,13 +7,19 @@
 
 import UIKit
 
-class CitiesTableViewController: UITableViewController {
-    let viewModel = CitiesViewModel(dataTransportLayer: JsonDataTransportLayer())
+class CitiesTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet var tableView: UITableView?
+    let viewModel: CitiesViewModel
     private let cancelBag = CancelBag()
 
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
+    init(viewModel: CitiesViewModel) {
+        self.viewModel = viewModel
         viewModel.startFetching()
+        super.init(nibName: String(describing: CitiesTableViewController.self), bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) not implemented")
     }
 
     // MARK: - ViewController life cycle
@@ -34,8 +40,10 @@ class CitiesTableViewController: UITableViewController {
     private func setupView() {
         title = "Cities"
         navigationController?.navigationBar.prefersLargeTitles = true
-        tableView.tableFooterView = UIView(frame: .zero)
-        tableView.register(CitiesTableViewCell.self, forCellReuseIdentifier: CitiesTableViewCell.kReuseIdentifier)
+        tableView?.tableFooterView = UIView(frame: .zero)
+        tableView?.register(CitiesTableViewCell.self, forCellReuseIdentifier: CitiesTableViewCell.kReuseIdentifier)
+        tableView?.delegate = self
+        tableView?.dataSource = self
     }
 
     private func addSearchController() {
@@ -49,18 +57,18 @@ class CitiesTableViewController: UITableViewController {
     private func listenToViewStateChanges() {
         viewModel.$viewState.sink { [weak self] _ in
             DispatchQueue.main.async {
-                self?.tableView.reloadData()
+                self?.tableView?.reloadData()
             }
         }.store(in: cancelBag)
     }
 
     // MARK: - Table view data source
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.cities.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CitiesTableViewCell.kReuseIdentifier, for: indexPath) as? CitiesTableViewCell else {
             return UITableViewCell()
         }
@@ -76,16 +84,16 @@ class CitiesTableViewController: UITableViewController {
 
     // MARK: - Table view delegate
 
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch viewModel.viewState {
-        case .initial: return "    Loading will start shortly..."
-        case .loadingData: return "    Loading..."
-        case .dataLoaded: return "    \(viewModel.cities.count) cities found"
-        case .error: return "    \(viewModel.error?.localizedDescription ?? "Something went wrong")"
+        case .initial: return "Loading will start shortly..."
+        case .loadingData: return "Loading..."
+        case .dataLoaded: return "\(viewModel.cities.count) cities found"
+        case .error: return "\(viewModel.error?.localizedDescription ?? "Something went wrong")"
         }
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO: move to coordinator.
         tableView.deselectRow(at: indexPath, animated: true)
         let vc = CityDetailViewController(viewModel: CityDetailViewModel(city: viewModel.cities[indexPath.row]))
@@ -100,3 +108,4 @@ extension CitiesTableViewController: UISearchResultsUpdating {
         viewModel.search(for: text)
     }
 }
+
