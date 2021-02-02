@@ -23,8 +23,8 @@ class CitiesViewModel: CityProvider, ObservableObject {
     private let searchAgent = SearchAgent()
     private var citiesBackup: [City] = []
 
-    init(dataTransportLayer: DataTransportLayer) {
-        self.dataTransportLayer = dataTransportLayer
+    init(dependency: HasDataTransportLayer) {
+        self.dataTransportLayer = dependency.dataTransportLayer
     }
 
     func startFetching() {
@@ -48,6 +48,20 @@ class CitiesViewModel: CityProvider, ObservableObject {
 
             self.cities = self.searchAgent.search(for: searchString, in: self.citiesBackup, using: algorithm)
             self.viewState = .dataLoaded
+        }
+    }
+
+    func city(at indexPath: IndexPath) -> City? {
+        guard indexPath.row < cities.count else { return nil }
+        return cities[indexPath.row]
+    }
+
+    func headerTitle() -> String {
+        switch viewState {
+        case .initial: return "Loading will start shortly..."
+        case .loadingData: return "Loading..."
+        case .dataLoaded: return "\(cities.count) cities found"
+        case .error: return "\(error?.localizedDescription ?? "Something went wrong")"
         }
     }
 

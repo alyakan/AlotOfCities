@@ -1,5 +1,5 @@
 //
-//  CitiesTableViewController.swift
+//  CitiesViewController.swift
 //  AlotOfCities
 //
 //  Created by Aly Yakan on 30/01/2021.
@@ -7,15 +7,21 @@
 
 import UIKit
 
-class CitiesTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    @IBOutlet var tableView: UITableView?
-    let viewModel: CitiesViewModel
-    private let cancelBag = CancelBag()
+protocol CitiesViewControllerOutput: class {
+    func showDetailView(forCity city: City)
+}
 
-    init(viewModel: CitiesViewModel) {
+class CitiesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet var tableView: UITableView?
+    private let viewModel: CitiesViewModel
+    private let cancelBag = CancelBag()
+    private weak var coordinator: CitiesViewControllerOutput?
+
+    init(viewModel: CitiesViewModel, coordinator: CitiesViewControllerOutput) {
         self.viewModel = viewModel
+        self.coordinator = coordinator
         viewModel.startFetching()
-        super.init(nibName: String(describing: CitiesTableViewController.self), bundle: nil)
+        super.init(nibName: String(describing: CitiesViewController.self), bundle: nil)
     }
 
     required init?(coder: NSCoder) {
@@ -73,9 +79,8 @@ class CitiesTableViewController: UIViewController, UITableViewDelegate, UITableV
             return UITableViewCell()
         }
 
-        guard indexPath.row < viewModel.cities.count else { return cell }
+        guard let city = viewModel.city(at: indexPath) else { return cell }
 
-        let city = viewModel.cities[indexPath.row]
         cell.titleLabel.text = "\(city.name), \(city.country)"
         cell.subtitleLabel.text = "latitude: \(city.coord.lat), longitude: \(city.coord.lon)"
 
@@ -85,23 +90,16 @@ class CitiesTableViewController: UIViewController, UITableViewDelegate, UITableV
     // MARK: - Table view delegate
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch viewModel.viewState {
-        case .initial: return "Loading will start shortly..."
-        case .loadingData: return "Loading..."
-        case .dataLoaded: return "\(viewModel.cities.count) cities found"
-        case .error: return "\(viewModel.error?.localizedDescription ?? "Something went wrong")"
-        }
+        viewModel.headerTitle()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: move to coordinator.
         tableView.deselectRow(at: indexPath, animated: true)
-        let vc = CityDetailViewController(viewModel: CityDetailViewModel(city: viewModel.cities[indexPath.row]))
-        navigationController?.pushViewController(vc, animated: true)
+        coordinator?.showDetailView(forCity: viewModel.cities[indexPath.row])
     }
 }
 
-extension CitiesTableViewController: UISearchResultsUpdating {
+extension CitiesViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
 

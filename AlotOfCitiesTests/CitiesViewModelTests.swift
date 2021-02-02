@@ -10,26 +10,21 @@ import XCTest
 
 class CitiesViewModelTests: XCTestCase {
     private let cancelBag = CancelBag()
+    private var viewModel = CitiesViewModel(dependency: AppDependency())
 
     override func setUpWithError() throws {
         try super.setUpWithError()
+        viewModel = CitiesViewModel(dependency: AppDependency())
         cancelBag.cancel()
     }
 
     func testCitiesViewModelInitialState() throws {
-        // Given
-        let viewModel = CitiesViewModel(dataTransportLayer: JsonDataTransportLayer())
-
-        // Then
         XCTAssertEqual(viewModel.viewState, .initial)
         XCTAssertTrue(viewModel.cities.isEmpty)
         XCTAssertNil(viewModel.error)
     }
 
     func testStartFetchingUpdatesViewState() throws {
-        // Given
-        let viewModel = CitiesViewModel(dataTransportLayer: JsonDataTransportLayer())
-
         // When
         viewModel.startFetching()
 
@@ -40,7 +35,6 @@ class CitiesViewModelTests: XCTestCase {
     func testCitiesViewModelFetchesAllCitiesInAscendingOrder() throws {
         // Given
         let exp = XCTestExpectation(description: "Couldn't load citities")
-        let viewModel = CitiesViewModel(dataTransportLayer: JsonDataTransportLayer())
 
         // When
         viewModel.startFetching()
@@ -48,7 +42,7 @@ class CitiesViewModelTests: XCTestCase {
             switch state {
             case .initial, .loadingData: break
             case .dataLoaded: exp.fulfill()
-            case .error: XCTFail(viewModel.error?.localizedDescription ?? "Something went wrong")
+            case .error: XCTFail(self.viewModel.error?.localizedDescription ?? "Something went wrong")
             }
         }.store(in: cancelBag)
         wait(for: [exp], timeout: TestConstants.kWaitTimeout)
@@ -71,9 +65,6 @@ class CitiesViewModelTests: XCTestCase {
     }
 
     func testSearchingForEmptyStringDoesNothing() throws {
-        // Given
-        let viewModel = CitiesViewModel(dataTransportLayer: JsonDataTransportLayer())
-
         // When
         viewModel.search(for: "")
 
@@ -84,7 +75,6 @@ class CitiesViewModelTests: XCTestCase {
     func testSearchForStringBeforDataIsLoadedDoesNothing() throws {
         // Given
         let exp = XCTestExpectation(description: "Couldn't load citities")
-        let viewModel = CitiesViewModel(dataTransportLayer: JsonDataTransportLayer())
 
         // When
         viewModel.startFetching()
@@ -94,7 +84,7 @@ class CitiesViewModelTests: XCTestCase {
             switch state {
             case .initial, .loadingData: break
             case .dataLoaded: exp.fulfill()
-            case .error: XCTFail(viewModel.error?.localizedDescription ?? "Something went wrong")
+            case .error: XCTFail(self.viewModel.error?.localizedDescription ?? "Something went wrong")
             }
         }.store(in: cancelBag)
         wait(for: [exp], timeout: TestConstants.kWaitTimeout)
@@ -107,7 +97,6 @@ class CitiesViewModelTests: XCTestCase {
     func testSearchForEmptyStringReturnsAllCitiesImmediately() throws {
         // Given
         var exp = XCTestExpectation(description: "Couldn't load citities")
-        let viewModel = CitiesViewModel(dataTransportLayer: JsonDataTransportLayer())
 
         // When
         viewModel.startFetching()
@@ -115,7 +104,7 @@ class CitiesViewModelTests: XCTestCase {
             switch state {
             case .initial, .loadingData: break
             case .dataLoaded: exp.fulfill()
-            case .error: XCTFail(viewModel.error?.localizedDescription ?? "Something went wrong")
+            case .error: XCTFail(self.viewModel.error?.localizedDescription ?? "Something went wrong")
             }
         }.store(in: cancelBag)
         wait(for: [exp], timeout: TestConstants.kWaitTimeout)
@@ -131,7 +120,7 @@ class CitiesViewModelTests: XCTestCase {
             switch state {
             case .initial, .loadingData: break
             case .dataLoaded: exp.fulfill()
-            case .error: XCTFail(viewModel.error?.localizedDescription ?? "Something went wrong")
+            case .error: XCTFail(self.viewModel.error?.localizedDescription ?? "Something went wrong")
             }
         }.store(in: cancelBag)
         wait(for: [exp], timeout: TestConstants.kWaitTimeout)
@@ -143,7 +132,6 @@ class CitiesViewModelTests: XCTestCase {
     func testSearchingForCityReturnsCorrectResult() throws {
         // Given
         var exp = XCTestExpectation(description: "Couldn't load citities")
-        let viewModel = CitiesViewModel(dataTransportLayer: JsonDataTransportLayer())
 
         // When
         viewModel.startFetching()
@@ -151,7 +139,7 @@ class CitiesViewModelTests: XCTestCase {
             switch state {
             case .initial, .loadingData: break
             case .dataLoaded: exp.fulfill()
-            case .error: XCTFail(viewModel.error?.localizedDescription ?? "Something went wrong")
+            case .error: XCTFail(self.viewModel.error?.localizedDescription ?? "Something went wrong")
             }
         }.store(in: cancelBag)
         wait(for: [exp], timeout: TestConstants.kWaitTimeout)
@@ -166,7 +154,7 @@ class CitiesViewModelTests: XCTestCase {
             switch state {
             case .initial, .loadingData: break
             case .dataLoaded: exp.fulfill()
-            case .error: XCTFail(viewModel.error?.localizedDescription ?? "Something went wrong")
+            case .error: XCTFail(self.viewModel.error?.localizedDescription ?? "Something went wrong")
             }
         }.store(in: cancelBag)
         wait(for: [exp], timeout: TestConstants.kWaitTimeout)
@@ -183,7 +171,6 @@ class CitiesViewModelTests: XCTestCase {
     func testSearchingForWrongStringReturnsEmpty() throws {
         // Given
         var exp = XCTestExpectation(description: "Couldn't load citities")
-        let viewModel = CitiesViewModel(dataTransportLayer: JsonDataTransportLayer())
 
         // When
         viewModel.startFetching()
@@ -191,7 +178,7 @@ class CitiesViewModelTests: XCTestCase {
             switch state {
             case .initial, .loadingData: break
             case .dataLoaded: exp.fulfill()
-            case .error: XCTFail(viewModel.error?.localizedDescription ?? "Something went wrong")
+            case .error: XCTFail(self.viewModel.error?.localizedDescription ?? "Something went wrong")
             }
         }.store(in: cancelBag)
         wait(for: [exp], timeout: TestConstants.kWaitTimeout)
@@ -206,7 +193,7 @@ class CitiesViewModelTests: XCTestCase {
             switch state {
             case .initial, .loadingData: break
             case .dataLoaded: exp.fulfill()
-            case .error: XCTFail(viewModel.error?.localizedDescription ?? "Something went wrong")
+            case .error: XCTFail(self.viewModel.error?.localizedDescription ?? "Something went wrong")
             }
         }.store(in: cancelBag)
         wait(for: [exp], timeout: TestConstants.kWaitTimeout)
