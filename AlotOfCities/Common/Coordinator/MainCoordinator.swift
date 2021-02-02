@@ -7,6 +7,9 @@
 
 import UIKit
 
+/**
+ Handles app navigation.
+ */
 class MainCoordinator: Coordinator {
     var rootController: UINavigationController
     var appDependency: AppDependency

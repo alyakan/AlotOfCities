@@ -64,7 +64,7 @@ class CitiesViewModelTests: XCTestCase {
         }
     }
 
-    func testSearchingForEmptyStringDoesNothing() throws {
+    func testSearchingForEmptyStringBeforeFetchingDoesNothing() throws {
         // When
         viewModel.search(for: "")
 
